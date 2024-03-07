@@ -1,6 +1,12 @@
-# Getting Started with Create React App
+# React Demo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This app demonstrates the following:
+- Components: Creating a component to render a button that shows a label and two incrementing counters
+- Props: Passing in the button label via [props](https://www.w3schools.com/react/react_props.asp)
+- Functions: Creating a function to render buttons from labels stored in an array of JSON elements
+- Component state: Incrementing individual button counters based on clicks
+- Lifting the state: Incrementing global button counters based on clicks
+
 
 ## Available Scripts
 

@@ -6,7 +6,7 @@ This app demonstrates the following:
 - Functions: Creating a function to render buttons from labels stored in an array of JSON elements
 - Component state: Incrementing individual button counters based on clicks
 - Lifting the state: Incrementing global button counters based on clicks
-
+- Two-way data binding: Changing text based on user form field input
 
 ## Available Scripts
 

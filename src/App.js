@@ -1,6 +1,7 @@
 import "./App.css";
 // The useState hook from the react library is necessary to add state variables to our components
-import { useState } from "react"; 
+// useId randomly generates unique IDs for our elements
+import { useState, useId } from "react";
 
 // App component
 export default function App() {
@@ -23,9 +24,19 @@ export default function App() {
       onClick={handleClick}
     />
   ));
+
+  //
+  const [fieldValue, setFieldValue] = useState('');
+
+  // Function to set the field value state to what the user inputs
+  function handleChangeFieldValue(e) {
+    // e.target references the DOM element that triggered the event (the input field) and value references the attribute
+    setFieldValue(e.target.value);
+  }
+
   return (
     <div>
-      <h1>Welcome to my app.</h1>
+      <h1>React Button Demo</h1>
       {/* This passes in the label, globalCount, and handleClick functions as props so the MyButton component can use them. */}
       <MyButton
         label="I'm a button"
@@ -37,8 +48,12 @@ export default function App() {
         globalCount={globalCount}
         onClick={handleClick}
       />
+      {/* We aren't passing in a label here */}
       <MyButton globalCount={globalCount} onClick={handleClick} />
       {createButtons}
+      <p>L = Local, G = Global</p>
+      <InputFields fieldValue={fieldValue} onChange={handleChangeFieldValue} />
+      {fieldValue}
     </div>
   );
 }
@@ -49,15 +64,10 @@ const options = [
   { label: "Pause", id: 3 },
 ];
 
-// MyButton component acceps label, onClick (function), and globalCount as props.
-function MyButton({ label, onClick, globalCount }) {
+// MyButton component accepts label, onClick (function), and globalCount as props.
+// Passing these in in {curly braces} is called destructuring
+function MyButton({ label = "Generic label", onClick, globalCount }) {
   // Conditional button labeling. If no label is passed in, "Generic label" will be used.
-  let buttonlabel;
-  if (label) {
-    buttonlabel = label;
-  } else {
-    buttonlabel = "Generic label";
-  }
 
   // Set the count state variable for the individual button click counter
   const [count, setCount] = useState(0);
@@ -72,8 +82,20 @@ function MyButton({ label, onClick, globalCount }) {
 
   return (
     // {Create the button, labeling it with a label and count value}
-    <button onClick={handleClick}>
-      {buttonlabel}: L {count}, G {globalCount}
+    <button id={useId()} onClick={handleClick}>
+      {label}: L {count}, G {globalCount}
     </button>
+  );
+}
+
+function InputFields({ onChange, fieldValue }) {
+  return (
+    <input
+      type="text"
+      id={useId()}
+      placeholder="Put something here"
+      value={fieldValue}
+      onChange={onChange}
+    ></input>
   );
 }
